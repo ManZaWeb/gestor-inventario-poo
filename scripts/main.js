@@ -7,24 +7,32 @@ const productManager = new ProductManager();
 
 // Evento relativo al formulario
 
-document.getElementById('form').addEventListener('submit', function(event){
+document.getElementById('product-form-events').addEventListener('submit', function(event){
     event.preventDefault();
 
     //Obtiene los valores del formulario
-    const id = document.getElementById('id').value;
-    const nombre = document.getElementById('nombre').value;
-    const precio = document.getElementById('precio').value;
-    const cantidad = document.getElementById('cantidad').value;
+    
+    const productName = document.getElementById('product-name').value;
+    const productPrice = document.getElementById('product-precio').value;
+    const productQuantity = parseInt(document.getElementById('product-quantity').value);
 
     //Crea un nuevo producto
-    const product = new Product(id, nombre, precio, cantidad);
 
-    //Agrega el producto a la lista
-    productManager.addProduct(product);
+    const newProduct = new Product(Date.now(), productName, productPrice, productQuantity);
 
-    //Muestra los productos
-    productManager.showProducts();
+    console.log(newProduct);
+
+    //Agrega el nuevo producto al administrador de productos
+
+    productManager.addProduct(newProduct);
 
     //Limpia el formulario
-    document.getElementById('form').reset();
+
+    this.reset();
+
+    //Actualiza la tabla del inventario
+
+    updateInventoryTable();
+    
 });
+
