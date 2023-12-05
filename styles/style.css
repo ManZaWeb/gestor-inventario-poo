@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'Nova Square';
+    src: url('/assets/fonts/NovaSquare/NovaSquare-Regular.ttf') format('truetype');
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(0, 16, 96);
+    background: radial-gradient(circle, rgba(0, 16, 96, 1) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Nova Square';
+    color: red;
+}
+
+.inventory-table-styles {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+    color: white;
+}
+
+.inventory-table-styles th,
+.inventory-table-styles td {
+    border: 1px solid #cccccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.inventory-table-styles th {
+    background-color: #3523b8;
+}
+
+.inventory-table-styles tr:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Estilos para el formulario con fondo negro */
+.product-form-styles {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+}
+
+/* Estilos para las etiquetas y campos de entrada */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input {
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    /* Borde con un tono más claro que el fondo */
+    border-radius: 3px;
+    color: white;
+    /* Texto en color blanco para mayor contraste */
+    background-color: black;
+    /* Fondo negro para los campos de entrada */
+    outline: none;
+}
+
+/* Estilos para el botón */
+button {
+    margin: 2%;
+    background-color: #3523b8;
+    /* Color de fondo azul */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+    /* Color de fondo azul más oscuro al pasar el cursor */
+}
