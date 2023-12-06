@@ -61,7 +61,7 @@ function updateInventoryTable(){
         element.addEventListener('click', function(event){
             event.preventDefault();
             const id = parseInt(this.dataset.id);
-            productManager.deleteProduct(id);
+            productManager.deleteProductById(id);
             updateInventoryTable();
         });
     });
