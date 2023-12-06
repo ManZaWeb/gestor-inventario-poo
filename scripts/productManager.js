@@ -43,6 +43,12 @@ export class ProductManager{
         };
     }
 
+    //Metodo para buscar un producto por su ID
+    searchProductByName(name){
+        const product = this.#products.find(product => product.nombre === name);
+        return product;
+    }
+
     //Getters y Setters
 
     get products(){
