@@ -13,7 +13,7 @@ document.getElementById('product-form-events').addEventListener('submit', functi
     //Obtiene los valores del formulario
     
     const productName = document.getElementById('product-name').value;
-    const productPrice = document.getElementById('product-precio').value;
+    const productPrice = document.getElementById('product-price').value;
     const productQuantity = parseInt(document.getElementById('product-quantity').value);
 
     //Crea un nuevo producto
@@ -36,3 +36,33 @@ document.getElementById('product-form-events').addEventListener('submit', functi
     
 });
 
+//Metodo para actualizar la tabla del inventario
+
+function updateInventoryTable(){
+    const inventoryTable = document.getElementById('body-table');
+    inventoryTable.innerHTML = "";
+
+    productManager.products.forEach(product => {
+        inventoryTable.innerHTML += `
+            <tr>
+                <td>${product.nombre}</td>
+                <td>${product.precio}</td>
+                <td>${product.cantidad}</td>
+                <td>
+                    <a href="#" class="btn btn-danger" name="delete-product" data-id="${product.id}">Delete</a>
+                </td>
+            </tr>
+        `;
+    });
+
+    //Evento para eliminar un producto
+
+    document.getElementsByName('delete-product').forEach(element => {
+        element.addEventListener('click', function(event){
+            event.preventDefault();
+            const id = parseInt(this.dataset.id);
+            productManager.deleteProduct(id);
+            updateInventoryTable();
+        });
+    });
+}
