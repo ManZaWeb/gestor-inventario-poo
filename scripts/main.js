@@ -67,14 +67,22 @@ function updateInventoryTable(){
     });
 }
 
-//Metodo para buscar un producto
+//Evento para buscar un producto
 
 document.getElementById('search-button').addEventListener('click', function(event){
     event.preventDefault();
-    const searchInputValue = document.getElementById('search-product').value;
-    const searchResult = productManager.searchProductByName(searchInputValue);
-    console.log(searchResult);
-    const searchInput = document.getElementById('search-product');
-    searchInput.innerHTML += `${searchResult.nombre}`;
-});
+    const productName = document.getElementById('search-product').value;
+    const product = productManager.searchProductByName(productName);
+    if(product !== undefined){
+        const productNameInput = document.getElementById('product-name');
+        const productPriceInput = document.getElementById('product-price');
+        const productQuantityInput = document.getElementById('product-quantity');
+        
+        productNameInput.value = product.nombre;
+        productPriceInput.value = product.precio;
+        productQuantityInput.value = product.cantidad;
+    } else {
+        alert('Producto no encontrado');
+    }
+})
 
