@@ -47,7 +47,9 @@ export class Product{
         console.log(`ID: ${this.#id}, Nombre: ${this.#nombre}, Cantidad: ${this.#cantidad}, Precio: ${this.#precio}`);
     }
 
-    toJSON() {  //transformar los objetos a JsonObject
+    //Transforma los objetos a JsonObject
+    
+    toJSON() {  
         return {
             id: this.#id,
             nombre: this.#nombre,
