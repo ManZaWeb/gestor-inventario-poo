@@ -5,16 +5,43 @@ import { ProductManager } from "./productManager.js";
 
 const productManager = new ProductManager();
 
+let discos = [
+    {id: 1, nombre: "Thriller - Michael Jackson", cantidad: 5, precio: 20 },
+    {id: 2, nombre: "The Dark Side of the Moon - Pink Floyd", cantidad: 10, precio: 15 },
+    {id: 3, nombre: "Abbey Road - The Beatles", cantidad: 15, precio: 25 },
+    {id: 4, nombre: "Rumours - Fleetwood Mac", cantidad: 20, precio: 30 },
+    {id: 5, nombre: "Back in Black - AC/DC", cantidad: 25, precio: 18 },
+    {id: 6, nombre: "The Wall - Pink Floyd", cantidad: 30, precio: 22 },
+    {id: 7, nombre: "Led Zeppelin IV - Led Zeppelin", cantidad: 35, precio: 28 },
+    {id: 8, nombre: "A Night at the Opera - Queen", cantidad: 40, precio: 32 },
+    {id: 8, nombre: "Hotel California - Eagles", cantidad: 45, precio: 35 },
+    {id: 10, nombre: "Born to Run - Bruce Springsteen", cantidad: 50, precio: 40 },
+];
+
+// Añadimos los discos de forma individual
+
+discos.forEach(product => {
+    productManager.addProduct(product);
+});
+
+updateInventoryTable()
+
+
+
 //Evento relativo al formulario
 
 document.getElementById('product-form-events').addEventListener('submit', function (event) {
+
     event.preventDefault();
 
-    //Obtiene los valores del formulario
+
+    //Obtiene los valores del formularioid:,
 
     const productName = document.getElementById('product-name').value;
     const productPrice = document.getElementById('product-price').value;
     const productQuantity = parseInt(document.getElementById('product-quantity').value);
+
+
 
 
     //Crea un nuevo producto
@@ -26,6 +53,7 @@ document.getElementById('product-form-events').addEventListener('submit', functi
     //Agrega el nuevo producto al administrador de productos
 
     productManager.addProduct(newProduct);
+
 
     //Limpia el formulario
 
@@ -148,11 +176,11 @@ function updateInventoryTable() {
                 backButton.id = 'back-button';
                 backButton.className = 'back-button';
 
-                // Agregar el botón al DOM
+                // Agregar el botón
                 document.body.appendChild(backButton);
 
-                // Agregar el evento de clic
-                backButton.addEventListener('click', function(event){
+                // Agregar el evento
+                backButton.addEventListener('click', function (event) {
                     event.preventDefault();
                     updateInventoryTable();
                 });
@@ -161,4 +189,5 @@ function updateInventoryTable() {
         } else {
             alert('Producto no encontrado');
         }
-    })};
+    })
+};
