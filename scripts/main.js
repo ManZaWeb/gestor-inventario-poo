@@ -1,3 +1,9 @@
+/**
+**Autor: Mario Alfonso Nuñex
+ **Profesión: DAW en proceso
+ **GitHub: https://github.com/ManZaWeb/gestor-inventario-poo.git
+ */
+
 import { Product } from "./product.js";
 import { ProductManager } from "./productManager.js";
 import { deleteProduct, editProduct } from "./mainAction.js";

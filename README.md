@@ -2,4 +2,4 @@
 
 **Autor**: Mario Alfonso Nuñez
 
-**GitHub**: 
+**GitHub**: https://github.com/ManZaWeb/gestor-inventario-poo.git
