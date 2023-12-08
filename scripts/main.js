@@ -48,8 +48,9 @@ function updateInventoryTable() {
         inventoryTable.innerHTML += `
             <tr>
                 <td>${product.nombre}</td>
-                <td>${product.precio}</td>
                 <td>${product.cantidad}</td>
+                <td>${product.precio}</td>
+                
                 <td>
                     <a href="#" class="btn-delete" name="delete-product" data-id="${product.id}">Delete</a>
                     <a href="#" class="btn-edit" name="edit-product" data-id="${product.id}">Editar</a>
@@ -79,7 +80,7 @@ function updateInventoryTable() {
             event.preventDefault();
             const id = parseInt(this.dataset.id);
 
-            const newProduct = new Product(id, prompt("Introduzca nuevo nombre"), prompt("Introduzca nueva cantidad"), prompt("Introduzca nuevo precio"));
+            const newProduct = new Product(id, prompt("Introduzca nuevo nombre"), prompt("Introduzca nueva cantidad"),prompt("Introduzca nuevo precio"));
 
             
             productManager.updateProductById(id, newProduct);
@@ -88,4 +89,18 @@ function updateInventoryTable() {
         });
     });
     
+
+    //Evento para buscar un producto
+
+    document.getElementById('search-button').addEventListener('click', function (event) {
+        event.preventDefault();
+        const productName = document.getElementById('search-product').value;
+        const product = productManager.searchProductByName(productName);
+        if (product) {
+            console.log(product);
+            alert(`ID: ${product.id} - Nombre: ${product.nombre} - Precio: ${product.precio} - Cantidad: ${product.cantidad}`);
+        } else {
+            alert('Producto no encontrado');
+        }
+    });
 }
