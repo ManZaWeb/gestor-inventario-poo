@@ -8,6 +8,7 @@ let backButton;
 //Instanciamos el productManager
 
 const productManager = new ProductManager();
+updateInventoryTable();
 
 //Evento relativo al formulario
 

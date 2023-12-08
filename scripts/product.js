@@ -46,4 +46,13 @@ export class Product{
     showProduct(){
         console.log(`ID: ${this.#id}, Nombre: ${this.#nombre}, Cantidad: ${this.#cantidad}, Precio: ${this.#precio}`);
     }
+
+    toJSON() {  //transformar los objetos a JsonObject
+        return {
+            id: this.#id,
+            nombre: this.#nombre,
+            cantidad: this.#cantidad,
+            precio: this.#precio
+        };
+    } 
 }

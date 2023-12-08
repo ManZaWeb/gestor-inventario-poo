@@ -1,11 +1,11 @@
-
+import { Product } from "./product.js";
 export class ProductManager{
 
     #products;
 
     constructor(){
         this.#products = [];
-        this.getToLocalStorage();
+        this.getFromLocalStorage();
     }
 
     //Metodo para obtener la lista de productos
@@ -25,6 +25,8 @@ export class ProductManager{
         //Si no existe error (es coincidente el index)
         if(index !== -1){
             this.#products[index] = updateProduct;
+            localStorage.removeItem(id);
+            this.setToLocalStorage();
         }
         
     }
@@ -44,6 +46,8 @@ export class ProductManager{
             console.log(`ID: ${product.id} - Nombre: ${product.nombre} - Precio: ${product.precio} - Cantidad: ${product.cantidad}`);
         };
     }
+
+    
 
     //Metodo para buscar un producto por su ID
     searchProductByName(name){
