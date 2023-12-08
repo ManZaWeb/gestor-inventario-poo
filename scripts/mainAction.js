@@ -10,6 +10,7 @@ export function deleteProduct(element, productManager, inventoryTable, updateInv
         updateInventoryTable();
 
         // Eliminar el botón "Atrás"
+        let backButton = document.getElementById('back-button');
         if (backButton) {
             backButton.remove();
         }
@@ -29,6 +30,7 @@ export function editProduct(element, productManager, inventoryTable, updateInven
         updateInventoryTable();
 
         // Eliminar el botón "Atrás"
+        let backButton = document.getElementById('back-button');
         if (backButton) {
             backButton.remove();
         }
