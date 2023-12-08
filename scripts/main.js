@@ -42,8 +42,6 @@ document.getElementById('product-form-events').addEventListener('submit', functi
 
 });
 
-
-
 //Función para actualizar la tabla del inventario
 
 function updateInventoryTable() {

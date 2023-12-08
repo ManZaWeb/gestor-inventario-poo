@@ -37,6 +37,7 @@ export class ProductManager{
         //Si no existe error (es coincidente el index)
         if(index !== -1){
             this.#products.splice(index, 1);
+            localStorage.removeItem(id);
         }
     }
 
@@ -62,8 +63,8 @@ export class ProductManager{
     }
 
     getFromLocalStorage() {
-        const products = Object.keys(localStorage).map(key => {
-            const data = JSON.parse(localStorage.getItem(key));
+        const products = Object.keys(localStorage).map(x => {
+            const data = JSON.parse(localStorage.getItem(x));
             return new Product(data.id, data.nombre, data.cantidad, data.precio);
         });
         this.#products = products;
