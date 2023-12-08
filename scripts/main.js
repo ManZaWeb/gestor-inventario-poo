@@ -84,7 +84,7 @@ function updateInventoryTable() {
         event.preventDefault();
         const productName = document.getElementById('search-product').value;
         const product = productManager.searchProductByName(productName);
-        if (product) {
+        if (product && productName !== '') {
             console.log(product);
             inventoryTable.innerHTML = `
                 <tr>
