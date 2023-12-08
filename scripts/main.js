@@ -1,13 +1,11 @@
-import { ProductManager } from "./productManager.js";
 import { Product } from "./product.js";
+import { ProductManager } from "./productManager.js";
 
-//Instancia el administrador de productos
+//Instanciamos el productManager
 
 const productManager = new ProductManager();
-let edited = false; // Si estamos editando cambiará a true
-let editedId = null; // Id del nuevo producto editado
 
-// Evento relativo al formulario
+//Evento relativo al formulario
 
 document.getElementById('product-form-events').addEventListener('submit', function (event) {
     event.preventDefault();
@@ -17,7 +15,7 @@ document.getElementById('product-form-events').addEventListener('submit', functi
     const productName = document.getElementById('product-name').value;
     const productPrice = document.getElementById('product-price').value;
     const productQuantity = parseInt(document.getElementById('product-quantity').value);
-    const inventoryTable = document.getElementById('body-table');
+    
 
     //Crea un nuevo producto
 
@@ -35,13 +33,10 @@ document.getElementById('product-form-events').addEventListener('submit', functi
 
     //Actualiza la tabla del inventario
 
-    updateInventoryTable();
-
-    
-
-    
+    updateInventoryTable();    
 
 });
+
 
 
 function updateInventoryTable() {
@@ -76,43 +71,18 @@ function updateInventoryTable() {
         });
     });
 
-    // Evento para editar un producto
+    //Evento para editar un producto
 
     document.getElementsByName('edit-product').forEach(element => {
-        
-        element.addEventListener('click', function () {
+        element.addEventListener('click', function (event) {
             console.log('Editando producto');
+            event.preventDefault();
+            const id = parseInt(this.dataset.id);
+            productManager.updateProductById(id, new Product(id, 'Nuevo nombre', 100, 10));
 
-            edited = true;
-
-            const productName = document.getElementById('product-name').value;
-            const productPrice = document.getElementById('product-price').value;
-            const productQuantity = parseInt(document.getElementById('product-quantity').value);
-
-            productName.value = element.nombre;
-            productPrice.value = element.precio;
-            productQuantity = element.cantidad;
-
-            if (edited) {           
-
-            const editButton = document.getElementById('submit-button');
-            editButton.textContent = 'Editar';
-            editButton.id = 'edit-button';
-
-            editButton.addEventListener('click', function () {
-                const id = parseInt(this.dataset.id);
-                const productName = document.getElementById('product-name').value;
-                const productPrice = document.getElementById('product-price').value;
-                const productQuantity = document.getElementById('product-quantity').value;
-
-                const updatedProduct = new Product(id, productName, productPrice, productQuantity);
-                
-                productManager.updateProductById(id, updatedProduct);
-
-            });
-                
-                updateInventoryTable();
-        }
-            });
+            inventoryTable.innerHTML = "";
+            updateInventoryTable();
         });
-    };
+    });
+    
+}
