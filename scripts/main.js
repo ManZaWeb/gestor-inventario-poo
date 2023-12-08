@@ -47,6 +47,7 @@ document.getElementById('product-form-events').addEventListener('submit', functi
 function updateInventoryTable() {
     const inventoryTable = document.getElementById('body-table');
     inventoryTable.innerHTML = "";
+    
 
     productManager.products.forEach(product => {
         inventoryTable.innerHTML += `
@@ -78,13 +79,21 @@ function updateInventoryTable() {
     // Evento para editar un producto
 
     document.getElementsByName('edit-product').forEach(element => {
+        
         element.addEventListener('click', function () {
             console.log('Editando producto');
 
-            let edited = true;
+            edited = true;
 
-            if (edited) {
-           
+            const productName = document.getElementById('product-name').value;
+            const productPrice = document.getElementById('product-price').value;
+            const productQuantity = parseInt(document.getElementById('product-quantity').value);
+
+            productName.value = element.nombre;
+            productPrice.value = element.precio;
+            productQuantity = element.cantidad;
+
+            if (edited) {           
 
             const editButton = document.getElementById('submit-button');
             editButton.textContent = 'Editar';
@@ -103,41 +112,7 @@ function updateInventoryTable() {
             });
                 
                 updateInventoryTable();
-            };
-        });
-    });
-
-
-    //Evento para buscar un producto
-
-    document.getElementById('search-button').addEventListener('click', function (event) {
-        event.preventDefault();
-        const productName = document.getElementById('search-product').value;
-        const product = productManager.searchProductByName(productName);
-
-        if (product !== undefined) {
-            const productNameElement = document.getElementById('product-name');
-            const productPriceElement = document.getElementById('product-price');
-            const productQuantityElement = document.getElementById('product-quantity');
-
-            productNameElement.value = product.nombre;
-            productPriceElement.value = product.precio;
-            productQuantityElement.value = product.cantidad;
-
-
-            // Cambiar el botón de "Agregar" a "Editar" y cambiar su ID
-            const editButton = document.getElementById('submit-button');
-            editButton.textContent = 'Editar';
-            editButton.id = 'edit-button';
-        } else {
-            alert('Producto no encontrado');
         }
-    });
-
-
-
-
-}
-
-
-
+            });
+        });
+    };
