@@ -24,6 +24,7 @@ h1 {
     animation-iteration-count: infinite;
 }
 
+/* Keyframe */
 @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
     10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -48,6 +49,7 @@ h1 {
     animation: slideDown 0.5s ease-out;
 }
 
+/* Keyframe */
 @keyframes slideDown {
     0% {
         transform: translateY(-200%);
@@ -130,6 +132,7 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Pseudoelemento */
 button::first-letter{
     font-size: 1.25em;
 }
