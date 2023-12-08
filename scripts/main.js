@@ -1,6 +1,7 @@
 import { Product } from "./product.js";
 import { ProductManager } from "./productManager.js";
 
+let backButton;
 //Instanciamos el productManager
 
 const productManager = new ProductManager();
@@ -34,15 +35,11 @@ document.getElementById('product-form-events').addEventListener('submit', functi
 
     event.preventDefault();
 
-
     //Obtiene los valores del formularioid:,
 
     const productName = document.getElementById('product-name').value;
     const productPrice = document.getElementById('product-price').value;
     const productQuantity = parseInt(document.getElementById('product-quantity').value);
-
-
-
 
     //Crea un nuevo producto
 
@@ -54,7 +51,6 @@ document.getElementById('product-form-events').addEventListener('submit', functi
 
     productManager.addProduct(newProduct);
 
-
     //Limpia el formulario
 
     this.reset();
@@ -65,11 +61,12 @@ document.getElementById('product-form-events').addEventListener('submit', functi
 
 });
 
-
+//Función para actualizar la tabla del inventario
 
 function updateInventoryTable() {
     const inventoryTable = document.getElementById('body-table');
     inventoryTable.innerHTML = "";
+    
 
 
     productManager.products.forEach(product => {
@@ -148,6 +145,8 @@ function updateInventoryTable() {
                     const id = parseInt(this.dataset.id);
                     productManager.deleteProductById(id);
                     inventoryTable.innerHTML = "";
+                    // Ocultar/eliminar el botón
+                    backButton.remove();
                     updateInventoryTable();
                 });
             });
@@ -165,17 +164,19 @@ function updateInventoryTable() {
 
                     productManager.updateProductById(id, newProduct);
                     inventoryTable.innerHTML = "";
+                    // Ocultar/eliminar el botón
+                    backButton.remove();
                     updateInventoryTable();
                 });
             });
 
             // Crear el botón "Atrás" si no existe
             if (!document.getElementById('back-button')) {
-                const backButton = document.createElement('button');
+                backButton = document.createElement('button');
                 backButton.textContent = 'Atrás';
                 backButton.id = 'back-button';
                 backButton.className = 'back-button';
-                backButton.style.display = 'block';
+                
 
                 // Agregar el botón
                 document.body.appendChild(backButton);
@@ -185,7 +186,7 @@ function updateInventoryTable() {
                     event.preventDefault();
                     updateInventoryTable();
 
-                    // Ocultar el botón
+                    // Ocultar/eliminar el botón
                     backButton.remove();
                 });
             }
@@ -193,5 +194,6 @@ function updateInventoryTable() {
         } else {
             alert('Producto no encontrado');
         }
+        
     })
 };
