@@ -4,17 +4,20 @@ import { Product } from "./product.js";
 //Instancia el administrador de productos
 
 const productManager = new ProductManager();
+let edited = false; // Si estamos editando cambiará a true
+let editedId = null; // Id del nuevo producto editado
 
 // Evento relativo al formulario
 
-document.getElementById('product-form-events').addEventListener('submit', function(event){
+document.getElementById('product-form-events').addEventListener('submit', function (event) {
     event.preventDefault();
 
     //Obtiene los valores del formulario
-    
+
     const productName = document.getElementById('product-name').value;
     const productPrice = document.getElementById('product-price').value;
     const productQuantity = parseInt(document.getElementById('product-quantity').value);
+    const inventoryTable = document.getElementById('body-table');
 
     //Crea un nuevo producto
 
@@ -33,12 +36,15 @@ document.getElementById('product-form-events').addEventListener('submit', functi
     //Actualiza la tabla del inventario
 
     updateInventoryTable();
+
     
+
+    
+
 });
 
-//Metodo para actualizar la tabla del inventario
 
-function updateInventoryTable(){
+function updateInventoryTable() {
     const inventoryTable = document.getElementById('body-table');
     inventoryTable.innerHTML = "";
 
@@ -49,7 +55,8 @@ function updateInventoryTable(){
                 <td>${product.precio}</td>
                 <td>${product.cantidad}</td>
                 <td>
-                    <a href="#" class="btn btn-danger" name="delete-product" data-id="${product.id}">Delete</a>
+                    <a href="#" class="btn-delete" name="delete-product" data-id="${product.id}">Delete</a>
+                    <a href="#" class="btn-edit" name="edit-product" data-id="${product.id}">Editar</a>
                 </td>
             </tr>
         `;
@@ -58,31 +65,79 @@ function updateInventoryTable(){
     //Evento para eliminar un producto
 
     document.getElementsByName('delete-product').forEach(element => {
-        element.addEventListener('click', function(event){
+        element.addEventListener('click', function (event) {
+            console.log('Eliminando producto');
             event.preventDefault();
             const id = parseInt(this.dataset.id);
             productManager.deleteProductById(id);
+            inventoryTable.innerHTML = "";
             updateInventoryTable();
         });
     });
+
+    // Evento para editar un producto
+
+    document.getElementsByName('edit-product').forEach(element => {
+        element.addEventListener('click', function () {
+            console.log('Editando producto');
+
+            let edited = true;
+
+            if (edited) {
+           
+
+            const editButton = document.getElementById('submit-button');
+            editButton.textContent = 'Editar';
+            editButton.id = 'edit-button';
+
+            editButton.addEventListener('click', function () {
+                const id = parseInt(this.dataset.id);
+                const productName = document.getElementById('product-name').value;
+                const productPrice = document.getElementById('product-price').value;
+                const productQuantity = document.getElementById('product-quantity').value;
+
+                const updatedProduct = new Product(id, productName, productPrice, productQuantity);
+                
+                productManager.updateProductById(id, updatedProduct);
+
+            });
+                
+                updateInventoryTable();
+            };
+        });
+    });
+
+
+    //Evento para buscar un producto
+
+    document.getElementById('search-button').addEventListener('click', function (event) {
+        event.preventDefault();
+        const productName = document.getElementById('search-product').value;
+        const product = productManager.searchProductByName(productName);
+
+        if (product !== undefined) {
+            const productNameElement = document.getElementById('product-name');
+            const productPriceElement = document.getElementById('product-price');
+            const productQuantityElement = document.getElementById('product-quantity');
+
+            productNameElement.value = product.nombre;
+            productPriceElement.value = product.precio;
+            productQuantityElement.value = product.cantidad;
+
+
+            // Cambiar el botón de "Agregar" a "Editar" y cambiar su ID
+            const editButton = document.getElementById('submit-button');
+            editButton.textContent = 'Editar';
+            editButton.id = 'edit-button';
+        } else {
+            alert('Producto no encontrado');
+        }
+    });
+
+
+
+
 }
 
-//Evento para buscar un producto
 
-document.getElementById('search-button').addEventListener('click', function(event){
-    event.preventDefault();
-    const productName = document.getElementById('search-product').value;
-    const product = productManager.searchProductByName(productName);
-    if(product !== undefined){
-        const productNameInput = document.getElementById('product-name');
-        const productPriceInput = document.getElementById('product-price');
-        const productQuantityInput = document.getElementById('product-quantity');
-        
-        productNameInput.value = product.nombre;
-        productPriceInput.value = product.precio;
-        productQuantityInput.value = product.cantidad;
-    } else {
-        alert('Producto no encontrado');
-    }
-})
 
