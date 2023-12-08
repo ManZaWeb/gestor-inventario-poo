@@ -175,6 +175,7 @@ function updateInventoryTable() {
                 backButton.textContent = 'Atrás';
                 backButton.id = 'back-button';
                 backButton.className = 'back-button';
+                backButton.style.display = 'block';
 
                 // Agregar el botón
                 document.body.appendChild(backButton);
@@ -183,6 +184,9 @@ function updateInventoryTable() {
                 backButton.addEventListener('click', function (event) {
                     event.preventDefault();
                     updateInventoryTable();
+
+                    // Ocultar el botón
+                    backButton.remove();
                 });
             }
 
