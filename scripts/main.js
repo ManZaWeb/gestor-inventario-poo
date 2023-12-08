@@ -78,8 +78,11 @@ function updateInventoryTable() {
             console.log('Editando producto');
             event.preventDefault();
             const id = parseInt(this.dataset.id);
-            productManager.updateProductById(id, new Product(id, 'Nuevo nombre', 100, 10));
 
+            const newProduct = new Product(id, prompt("Introduzca nuevo nombre"), prompt("Introduzca nueva cantidad"), prompt("Introduzca nuevo precio"));
+
+            
+            productManager.updateProductById(id, newProduct);
             inventoryTable.innerHTML = "";
             updateInventoryTable();
         });
