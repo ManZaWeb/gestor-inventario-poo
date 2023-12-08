@@ -15,7 +15,7 @@ let discos = [
     {id: 6, nombre: "The Wall - Pink Floyd", cantidad: 30, precio: 22 },
     {id: 7, nombre: "Led Zeppelin IV - Led Zeppelin", cantidad: 35, precio: 28 },
     {id: 8, nombre: "A Night at the Opera - Queen", cantidad: 40, precio: 32 },
-    {id: 8, nombre: "Hotel California - Eagles", cantidad: 45, precio: 35 },
+    {id: 9, nombre: "Hotel California - Eagles", cantidad: 45, precio: 35 },
     {id: 10, nombre: "Born to Run - Bruce Springsteen", cantidad: 50, precio: 40 },
 ];
 
@@ -60,6 +60,8 @@ document.getElementById('product-form-events').addEventListener('submit', functi
     updateInventoryTable();
 
 });
+
+
 
 //Función para actualizar la tabla del inventario
 
