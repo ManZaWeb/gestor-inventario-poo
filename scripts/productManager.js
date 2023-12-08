@@ -45,7 +45,7 @@ export class ProductManager{
 
     //Metodo para buscar un producto por su ID
     searchProductByName(name){
-        const product = this.#products.find(product => product.nombre === name);
+        const product = this.#products.find(product => product.nombre.includes(name));
         return product;
     }
 
