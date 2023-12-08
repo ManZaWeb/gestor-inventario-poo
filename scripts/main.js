@@ -1,5 +1,6 @@
 import { Product } from "./product.js";
 import { ProductManager } from "./productManager.js";
+import { deleteProduct, editProduct } from "./mainAction.js";
 
 let backButton;
 //Instanciamos el productManager
@@ -89,31 +90,13 @@ function updateInventoryTable() {
     //Evento para eliminar un producto
 
     document.getElementsByName('delete-product').forEach(element => {
-        element.addEventListener('click', function (event) {
-            console.log('Eliminando producto');
-            event.preventDefault();
-            const id = parseInt(this.dataset.id);
-            productManager.deleteProductById(id);
-            inventoryTable.innerHTML = "";
-            updateInventoryTable();
-        });
+        deleteProduct(element, productManager, inventoryTable, updateInventoryTable);
     });
 
     //Evento para editar un producto
 
     document.getElementsByName('edit-product').forEach(element => {
-        element.addEventListener('click', function (event) {
-            console.log('Editando producto');
-            event.preventDefault();
-            const id = parseInt(this.dataset.id);
-
-            const newProduct = new Product(id, prompt("Introduzca nuevo nombre"), prompt("Introduzca nueva cantidad"), prompt("Introduzca nuevo precio"));
-
-
-            productManager.updateProductById(id, newProduct);
-            inventoryTable.innerHTML = "";
-            updateInventoryTable();
-        });
+        editProduct(element, productManager, inventoryTable, updateInventoryTable);
     });
 
 
