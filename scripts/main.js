@@ -2,7 +2,9 @@ import { Product } from "./product.js";
 import { ProductManager } from "./productManager.js";
 import { deleteProduct, editProduct } from "./mainAction.js";
 
+// Instanciamos el botón "Atrás" para su posterior uso
 let backButton;
+
 //Instanciamos el productManager
 
 const productManager = new ProductManager();

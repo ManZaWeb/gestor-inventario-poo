@@ -5,6 +5,7 @@ export class ProductManager{
 
     constructor(){
         this.#products = [];
+        this.getToLocalStorage();
     }
 
     //Metodo para obtener la lista de productos
@@ -15,6 +16,7 @@ export class ProductManager{
     //Metodo para agregar un producto a la lista
     addProduct(product){
         this.#products.push(product);
+        this.setToLocalStorage();
     }
 
     //Metodo para actualizar un producto de la lista
@@ -49,6 +51,20 @@ export class ProductManager{
         return product;
     }
 
+    setToLocalStorage() {
+        this.#products.forEach(product => {
+            localStorage.setItem(product.id, JSON.stringify(product.toJSON()));
+        });
+    }
+
+    getFromLocalStorage() {
+        const products = Object.keys(localStorage).map(key => {
+            const data = JSON.parse(localStorage.getItem(key));
+            return new Product(data.id, data.nombre, data.cantidad, data.precio);
+        });
+        this.#products = products;
+    }
+
     //Getters y Setters
 
     get products(){
@@ -58,4 +74,6 @@ export class ProductManager{
     set products(products){
         this.#products = products;
     }
+
+    
 }
